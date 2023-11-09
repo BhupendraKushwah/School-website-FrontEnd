@@ -1,38 +1,85 @@
-.App {
-  text-align: center;
-}
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: calc(100vh - 95px); 
+}
+main {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto; /* Enable scrollbar for content larger than the container */
+  max-height: calc(100vh - 95px); /* Subtract navbar height from viewport height */
+  padding: 20px;
+}
+.sidebar {
+  background: #f5f5f5;
+  color: #000;
+  max-height: calc(100vh - 95px);
+  width: 200px;
+  position: relative;
+  border-right: 2px solid #e0e0e0;
+  padding: 20px 10px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.1s;
 }
 
-.App-link {
-  color: #61dafb;
+.link {
+  display: flex;
+  color: #000;
+  padding: 10px 15px;
+  gap: 15px;
+  border-radius: 4px; /* Rounded corners for a softer look */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle box-shadow for a border effect */
+  margin-bottom: 8px; /* Spacing between each link */
+  transition: all 0.2s;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.link:hover {
+  background-color: #e0e0e0; /* Background color on hover */
+  color: #000;
+  transition: all 0.5s;
+}
+.active {
+  background: #e0e0e0;
+  color: #000;
+}
+.icon,
+.link_text {
+  font-size: 15px;
+}
+.link_text:hover {
+  cursor: pointer;
+}
+.sub-link {
+  padding: 10px 25px;
+  color: #686767;
+}
+.login-Links {
+  font-size: 15px;
+  color: rgb(8, 8, 171);
+}
+
+.StudentActions {
+  font-size: 1rem;
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  border-radius: 50%;
+  width: 25px;
+  height: 20px;
+}
+.ActionBtn > :nth-child(1) {
+  color: #fff;
+  background-color: rgb(7, 181, 7);
+}
+.ActionBtn > :nth-child(2) {
+  color: #fff;
+  background-color: rgb(255, 5, 0);
 }
