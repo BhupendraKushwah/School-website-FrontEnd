@@ -9,7 +9,7 @@ const CalendarCard = () => {
       <CardContent>
         <Grid container direction="column" alignItems="stretch">
           <Grid item xs={12}>
-            {/* Adjust the size based on your requirements */}
+            
             <div
               style={{
                 fontSize: ".8rem",

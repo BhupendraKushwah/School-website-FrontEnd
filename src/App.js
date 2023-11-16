@@ -17,6 +17,7 @@ function App() {
       <Sidebar>
       <Routes>
         <Route path="/" element={<Home/>}></Route>
+        <Route path="/students/management/studentList" element={<StudentCard/>}></Route>
         <Route path="/logout" element={<LoginPage/>}></Route>
         <Route path="/student" element={<Students/>}></Route>
       </Routes>

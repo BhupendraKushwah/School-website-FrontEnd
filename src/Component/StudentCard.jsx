@@ -15,6 +15,7 @@ import {
 import React from "react";
 import { FaRegPenToSquare, FaTrash } from "react-icons/fa6";
 
+
 const StudentCard = (props) => {
   const handleUpdate = (id) => {
     console.log("updateStudentCard");
@@ -36,7 +37,7 @@ const StudentCard = (props) => {
       contact: "123-456-7890",
       class: "12th Grade",
       attendance: "95%",
-      avatar: "https://via.placeholder.com/50", // Replace with actual image URLs
+       
     },
     {
       id: 1,
@@ -50,7 +51,7 @@ const StudentCard = (props) => {
       contact: "123-456-7890",
       class: "12th Grade",
       attendance: "95%",
-      avatar: "https://via.placeholder.com/50", // Replace with actual image URLs
+       
     },
     {
       id: 1,
@@ -64,7 +65,7 @@ const StudentCard = (props) => {
       contact: "123-456-7890",
       class: "12th Grade",
       attendance: "95%",
-      avatar: "https://via.placeholder.com/50", // Replace with actual image URLs
+       
     },
     {
       id: 1,
@@ -78,7 +79,63 @@ const StudentCard = (props) => {
       contact: "123-456-7890",
       class: "12th Grade",
       attendance: "95%",
-      avatar: "https://via.placeholder.com/50", // Replace with actual image URLs
+       
+    },
+    {
+      id: 1,
+      name: "John Doe",
+      age: 18,
+      grade: "A",
+      email: "john@example.com",
+      enrollment: "202301",
+      dob: "2005-05-15",
+      guardians: "John Doe Sr., Jane Doe",
+      contact: "123-456-7890",
+      class: "12th Grade",
+      attendance: "95%",
+       
+    },
+    {
+      id: 1,
+      name: "John Doe",
+      age: 18,
+      grade: "A",
+      email: "john@example.com",
+      enrollment: "202301",
+      dob: "2005-05-15",
+      guardians: "John Doe Sr., Jane Doe",
+      contact: "123-456-7890",
+      class: "12th Grade",
+      attendance: "95%",
+       
+    },
+    {
+      id: 1,
+      name: "John Doe",
+      age: 18,
+      grade: "A",
+      email: "john@example.com",
+      enrollment: "202301",
+      dob: "2005-05-15",
+      guardians: "John Doe Sr., Jane Doe",
+      contact: "123-456-7890",
+      class: "12th Grade",
+      attendance: "95%",
+       
+    },
+    {
+      id: 1,
+      name: "John Doe",
+      age: 18,
+      grade: "A",
+      email: "john@example.com",
+      enrollment: "202301",
+      dob: "2005-05-15",
+      guardians: "John Doe Sr., Jane Doe",
+      contact: "123-456-7890",
+      class: "12th Grade",
+      attendance: "95%",
+       
     },
     {
       id: 2,
@@ -92,24 +149,20 @@ const StudentCard = (props) => {
       contact: "987-654-3210",
       class: "11th Grade",
       attendance: "92%",
-      avatar: "https://via.placeholder.com/50", // Replace with actual image URLs
+       
     },
     // Add more student details as needed
   ];
+
   return (
-    <Card
-      sx={
-        !props.height
-          ? { maxWidth: 345, minWidth: props.width + "%" }
-          : { height: props.height + "vh" }
-      }
-    >
+    <Card sx={{ width: "100%", overflowX: "auto" }}>
       <CardContent>
-        <Typography component="h1" variant="h5">New Students</Typography>
-        <div style={{ height: "400px", overflowY: "auto" }}>
-        <TableContainer component={Paper}>
+        <Typography component="h1" variant="h5">
+          New Students
+        </Typography>
+        <TableContainer component={Paper} sx={{ marginTop: "10px" }}>
           <Table>
-            {<TableHead>
+            <TableHead>
               <TableRow>
                 <TableCell>Avatar</TableCell>
                 <TableCell>Student Id</TableCell>
@@ -123,13 +176,14 @@ const StudentCard = (props) => {
                 <TableCell>Attendance</TableCell>
                 <TableCell>Actions</TableCell>
               </TableRow>
-            </TableHead>}
+            </TableHead>
             <TableBody>
               {Students.map((student) => (
                 <TableRow key={student.enrollment}>
                   <TableCell>
-                    <Avatar alt={student.name} src={student.avatar} />
+                    <Avatar alt={student.name} src={student.avatar?student.avatar:student.name} />
                   </TableCell>
+                  {console.log(student.name)}
                   <TableCell>{student.enrollment}</TableCell>
                   <TableCell>{student.name}</TableCell>
                   <TableCell>{student.age}</TableCell>
@@ -139,19 +193,20 @@ const StudentCard = (props) => {
                   <TableCell>{student.contact}</TableCell>
                   <TableCell>{student.class}</TableCell>
                   <TableCell>{student.attendance}</TableCell>
-                  <TableCell className="ActionBtn" sx={{ padding:"0" }}>
+                  <TableCell sx={{ padding: "12px" }}>
                     <FaRegPenToSquare
                       variant="outlined"
                       color="primary"
-                      className="StudentActions"
+                      className="StudentActions updateButton"
                       onClick={() => handleUpdate(student.id)}
+                      style={{ marginRight: "12px" }}
                     >
                       Update
                     </FaRegPenToSquare>
                     <FaTrash
                       variant="outlined"
                       color="secondary"
-                      className="StudentActions"
+                      className="StudentActions deleteButton"
                       onClick={() => handleDelete(student.id)}
                     >
                       Delete
@@ -162,7 +217,6 @@ const StudentCard = (props) => {
             </TableBody>
           </Table>
         </TableContainer>
-        </div>
       </CardContent>
     </Card>
   );

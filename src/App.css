@@ -75,11 +75,11 @@ main {
   width: 25px;
   height: 20px;
 }
-.ActionBtn > :nth-child(1) {
+.updateButton {
   color: #fff;
   background-color: rgb(7, 181, 7);
 }
-.ActionBtn > :nth-child(2) {
+.deleteButton {
   color: #fff;
   background-color: rgb(255, 5, 0);
 }

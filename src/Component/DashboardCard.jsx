@@ -262,28 +262,28 @@ const DashboardCard = () => {
             <DashCard
               name={"Total Student"}
               value={250}
-              width={{ xs: 12, sm: 24 }}
+              width={24 }
               icon={<FaUserGraduate />}
               color={pink}
             />
             <DashCard
               name={"Total Teacher"}
               value={20}
-              width={{ xs: 12, sm: 24 }}
+              width={24 }
               icon={<FaUserTie />}
               color={blue}
             />
             <DashCard
               name={"Total Class"}
               value={12}
-              width={{ xs: 12, sm: 24 }}
+              width={ 24 }
               icon={<FaChalkboardTeacher />}
               color={green}
             />
             <DashCard
               name={"Total Revenue"}
               value={52000}
-              width={{ xs: 12, sm: 24 }}
+              width={24 }
               icon={<FaRupeeSign />}
               color={purple}
             />

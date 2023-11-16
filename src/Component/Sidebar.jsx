@@ -36,9 +36,7 @@ const Sidebar = ({ children }) => {
       name: "Students Management",
       icon: <FaUserAlt />,
       submenu: [
-        { path: "/students/management/add-student", name: "Add Student" },
-        { path: "/students/management/update-student", name: "Update Student" },
-        { path: "/students/management/deleteStudent", name: "Delete Student" },
+        { path: "/students/management/studentList", name: "Student List" },
         {
           path: "/students/management/attendanceReport",
           name: "Attendance Report",
@@ -52,10 +50,7 @@ const Sidebar = ({ children }) => {
       name: "Teacher Management",
       icon: <  FaChalkboardTeacher />,
       submenu: [
-        { path: "/students/management/add-teacher", name: "Add Teacher" },
-        { path: "/students/management/fetch-teachers", name: "Fetch Teacher" },
-        { path: "/students/management/update-teacher", name: "Update Teacher" },
-        { path: "/students/management/delete-teacher", name: "Delete Teacher" },
+        { path: "/students/management/teacherList", name: "Teacher List" },
         {
           path: "/students/management/forgot-password",
           name: "Teacher forgot password",
