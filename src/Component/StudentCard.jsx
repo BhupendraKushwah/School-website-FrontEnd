@@ -158,7 +158,7 @@ const StudentCard = (props) => {
     <Card sx={{ width: "100%", overflowX: "auto" }}>
       <CardContent>
         <Typography component="h1" variant="h5">
-          New Students
+          Student List
         </Typography>
         <TableContainer component={Paper} sx={{ marginTop: "10px" }}>
           <Table>

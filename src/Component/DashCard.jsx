@@ -19,7 +19,6 @@ const DashCard = (props) => {
       }}
     >
       <CardContent>
-        {console.log(props.width+"%")}
         <Grid container spacing={2}>
           <Grid item>
             {props.icon && (

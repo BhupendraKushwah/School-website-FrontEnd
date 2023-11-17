@@ -27,22 +27,22 @@ const Sidebar = ({ children }) => {
 
   const menuItem = [
     {
-      path: "/",
+      path: "admin/",
       name: "Dashboard",
       icon: <FaTh />,
     },
     {
-      path: "/students/management",
+      path: "admin/students/management",
       name: "Students Management",
       icon: <FaUserAlt />,
       submenu: [
-        { path: "/students/management/studentList", name: "Student List" },
+        { path: "admin/students/management/studentList", name: "Student List" },
         {
-          path: "/students/management/attendanceReport",
+          path: "admin/students/management/attendanceReport",
           name: "Attendance Report",
         },
-        { path: "/students/management/record-marks", name: "Record Marks" },
-        { path: "/students/management/get-marks", name: "Fetch Marks" },
+        { path: "admin/students/management/record-marks", name: "Record Marks" },
+        { path: "admin/students/management/get-marks", name: "Fetch Marks" },
       ],
     },
     {
@@ -50,38 +50,38 @@ const Sidebar = ({ children }) => {
       name: "Teacher Management",
       icon: <  FaChalkboardTeacher />,
       submenu: [
-        { path: "/students/management/teacherList", name: "Teacher List" },
+        { path: "admin/teacher/management/teacherList", name: "Teacher List" },
         {
-          path: "/students/management/forgot-password",
+          path: "admin/teacher/management/forgot-password",
           name: "Teacher forgot password",
         },
         {
-          path: "/students/management/TeacherRegisterAttendee",
+          path: "admin/teacher/management/TeacherRegisterAttendee",
           name: "Teacher Attendance",
         },
         {
-          path: "/students/management/TeacherAttendanceReport",
+          path: "admin/teacher/management/TeacherAttendanceReport",
           name: "Attendance Report",
         },
       ],
     },
     {
-      path: "/class",
+      path: "admin/class",
       name: "Class",
       icon: <FaChalkboard />,
     },
     {
-      path: "/feedbacks",
+      path: "admin/feedbacks",
       name: "Feedbacks",
       icon: <MdFeedback />,
     },
     {
-      path: "/fee-structure",
+      path: "admin/fee-structure",
       name: "Fee Structure",
       icon: <FaRupeeSign />,
     },
     {
-      path: "/logout",
+      path: "admin/logout",
       name: "Logout",
       icon: <FaSignOutAlt />,
     },
