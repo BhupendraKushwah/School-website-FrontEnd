@@ -1,6 +1,5 @@
 import React from "react";
-import DashboardCard from "../../Component/DashboardCard";
-import DashCard from "../../Component/DashCard";
+import DashboardCard from "../../Component/Admin/DashboardCard";
 import Typography from '@mui/material/Typography'
 
 const HomePage = () => {

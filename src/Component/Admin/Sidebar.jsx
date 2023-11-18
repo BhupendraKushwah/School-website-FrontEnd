@@ -10,7 +10,7 @@ import {
 import { MdFeedback } from "react-icons/md";
 
 import { NavLink } from "react-router-dom";
-import SidebarContext from "../Context/SidebarContext/SidebarContext";
+import SidebarContext from "../../Context/SidebarContext/SidebarContext";
 
 const Sidebar = ({ children }) => {
 

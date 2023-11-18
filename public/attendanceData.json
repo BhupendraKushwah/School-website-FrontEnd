@@ -1,0 +1,171 @@
+[
+    {
+      "_id": "654211827a08ab88c194f7b1",
+      "StudentId": "6540c3fd7f28f1c69aa606a5",
+      "AttendanceByDate": [
+        {
+          "Status": "Present",
+          "Class": "Class 9",
+          "_id": "654211827a08ab88c194f7b2",
+          "Date": "2023-11-01T00:00:00.000Z"
+        },
+        {
+          "Date": "2023-10-29T00:00:00.000Z",
+          "Status": "Present",
+          "Class": "Class 9",
+          "_id": "654218b6d7de1bc1ddb0dd33"
+        },
+        {
+          "Date": "2023-11-02T00:00:00.000Z",
+          "Status": "Present",
+          "Class": "Class 9",
+          "_id": "6542ad1a344d5ad0e3826c33"
+        },
+        {
+          "Date": "2023-11-04T00:00:00.000Z",
+          "Status": "Present",
+          "Class": "Class 9",
+          "_id": "65455121bd2f3505bd72f4f2"
+        }
+      ],
+      "__v": 5
+    },
+    {
+      "_id": "654216cbd2b1e52a7737005f",
+      "StudentId": "653d3d680ba67a099096a69e",
+      "AttendanceByDate": [
+        {
+          "Status": "Present",
+          "Class": "Nursery",
+          "_id": "654216cbd2b1e52a77370060",
+          "Date": "2023-11-01T00:00:00.000Z"
+        }
+      ],
+      "__v": 0
+    },
+    {
+      "_id": "654230f5de388292ba10aa85",
+      "StudentId": "617c3d3b5e7f9d471f113160",
+      "AttendanceByDate": [
+        {
+          "Date": "2023-11-01T00:00:00.000Z",
+          "Status": "Absent",
+          "Class": "Class 9",
+          "_id": "654230f5de388292ba10aa86"
+        },
+        {
+          "Date": "2023-11-02T00:00:00.000Z",
+          "Status": "Absent",
+          "Class": "Class 9",
+          "_id": "6542ad1b344d5ad0e3826c3f"
+        },
+        {
+          "Date": "2023-11-04T00:00:00.000Z",
+          "Status": "Absent",
+          "Class": "Class 9",
+          "_id": "65455121bd2f3505bd72f501"
+        }
+      ],
+      "__v": 4
+    },
+    {
+      "_id": "654230f5de388292ba10aa88",
+      "StudentId": "617c3d3b5e7f9d471f11315e",
+      "AttendanceByDate": [
+        {
+          "Date": "2023-11-01T00:00:00.000Z",
+          "Status": "Absent",
+          "Class": "Class 9",
+          "_id": "654230f5de388292ba10aa89"
+        },
+        {
+          "Date": "2023-11-02T00:00:00.000Z",
+          "Status": "Absent",
+          "Class": "Class 9",
+          "_id": "6542ad1a344d5ad0e3826c37"
+        },
+        {
+          "Date": "2023-11-04T00:00:00.000Z",
+          "Status": "Absent",
+          "Class": "Class 9",
+          "_id": "65455121bd2f3505bd72f4f7"
+        }
+      ],
+      "__v": 4
+    },
+    {
+      "_id": "654230f5de388292ba10aa8b",
+      "StudentId": "617c3d3b5e7f9d471f11315f",
+      "AttendanceByDate": [
+        {
+          "Date": "2023-11-01T00:00:00.000Z",
+          "Status": "Present",
+          "Class": "Class 9",
+          "_id": "654230f5de388292ba10aa8c"
+        },
+        {
+          "Date": "2023-11-02T00:00:00.000Z",
+          "Status": "Present",
+          "Class": "Class 9",
+          "_id": "6542ad1b344d5ad0e3826c3b"
+        },
+        {
+          "Date": "2023-11-04T00:00:00.000Z",
+          "Status": "Present",
+          "Class": "Class 9",
+          "_id": "65455121bd2f3505bd72f4fc"
+        }
+      ],
+      "__v": 4
+    },
+    {
+      "_id": "654230f6de388292ba10aa8e",
+      "StudentId": "617c3d3b5e7f9d471f113161",
+      "AttendanceByDate": [
+        {
+          "Date": "2023-11-01T00:00:00.000Z",
+          "Status": "Present",
+          "Class": "Class 9",
+          "_id": "654230f6de388292ba10aa8f"
+        },
+        {
+          "Date": "2023-11-02T00:00:00.000Z",
+          "Status": "Present",
+          "Class": "Class 9",
+          "_id": "6542ad1b344d5ad0e3826c43"
+        },
+        {
+          "Date": "2023-11-04T00:00:00.000Z",
+          "Status": "Present",
+          "Class": "Class 9",
+          "_id": "65455121bd2f3505bd72f506"
+        }
+      ],
+      "__v": 4
+    },
+    {
+      "_id": "654230f6de388292ba10aa91",
+      "StudentId": "617c3d3b5e7f9d471f113162",
+      "AttendanceByDate": [
+        {
+          "Date": "2023-11-01T00:00:00.000Z",
+          "Status": "Present",
+          "Class": "Class 9",
+          "_id": "654230f6de388292ba10aa92"
+        },
+        {
+          "Date": "2023-11-02T00:00:00.000Z",
+          "Status": "Present",
+          "Class": "Class 9",
+          "_id": "6542ad1b344d5ad0e3826c47"
+        },
+        {
+          "Date": "2023-11-04T00:00:00.000Z",
+          "Status": "Absent",
+          "Class": "Class 9",
+          "_id": "65455121bd2f3505bd72f50b"
+        }
+      ],
+      "__v": 4
+    }
+  ]

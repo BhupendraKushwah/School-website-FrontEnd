@@ -1,5 +1,5 @@
 import React, { useContext,useState } from "react";
-import SidebarContext from "../Context/SidebarContext/SidebarContext";
+import SidebarContext from "../../Context/SidebarContext/SidebarContext";
 import { IconButton, Avatar, Menu, MenuItem  } from "@mui/material";
 import { red } from "@mui/material/colors";
 import MenuIcon from "@mui/icons-material/Menu";

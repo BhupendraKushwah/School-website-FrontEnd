@@ -1,0 +1,6 @@
+[
+  { "id": 1, "name": "John Doe", "subject": "Math" },
+  { "id": 2, "name": "Jane Smith", "subject": "English" },
+  { "id": 3, "name": "Bob Johnson", "subject": "History" },
+  { "id": 4, "name": "Alice Brown", "subject": "Physics" }
+]
