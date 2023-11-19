@@ -10,15 +10,31 @@ import {
   TableHead,
   TableRow,
   Typography,
+  IconButton,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 
-import React from "react";
-import { FaRegPenToSquare, FaTrash } from "react-icons/fa6";
+import React, { useState } from "react";
 
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 const StudentCard = (props) => {
-  const handleUpdate = (id) => {
-    console.log("updateStudentCard");
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [selectedStudent, setSelectedStudent] = useState(null);
+
+  const openMenu = (event, student) => {
+    setAnchorEl(event.currentTarget);
+    setSelectedStudent(student);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleUpdate = (student) => {
+    console.log("updateStudentCard", student.id);
+    handleMenuClose();
   };
   const handleDelete = (id) => {
     console.log("deleteStudentCard");
@@ -37,105 +53,6 @@ const StudentCard = (props) => {
       contact: "123-456-7890",
       class: "12th Grade",
       attendance: "95%",
-       
-    },
-    {
-      id: 1,
-      name: "John Doe",
-      age: 18,
-      grade: "A",
-      email: "john@example.com",
-      enrollment: "202301",
-      dob: "2005-05-15",
-      guardians: "John Doe Sr., Jane Doe",
-      contact: "123-456-7890",
-      class: "12th Grade",
-      attendance: "95%",
-       
-    },
-    {
-      id: 1,
-      name: "John Doe",
-      age: 18,
-      grade: "A",
-      email: "john@example.com",
-      enrollment: "202301",
-      dob: "2005-05-15",
-      guardians: "John Doe Sr., Jane Doe",
-      contact: "123-456-7890",
-      class: "12th Grade",
-      attendance: "95%",
-       
-    },
-    {
-      id: 1,
-      name: "John Doe",
-      age: 18,
-      grade: "A",
-      email: "john@example.com",
-      enrollment: "202301",
-      dob: "2005-05-15",
-      guardians: "John Doe Sr., Jane Doe",
-      contact: "123-456-7890",
-      class: "12th Grade",
-      attendance: "95%",
-       
-    },
-    {
-      id: 1,
-      name: "John Doe",
-      age: 18,
-      grade: "A",
-      email: "john@example.com",
-      enrollment: "202301",
-      dob: "2005-05-15",
-      guardians: "John Doe Sr., Jane Doe",
-      contact: "123-456-7890",
-      class: "12th Grade",
-      attendance: "95%",
-       
-    },
-    {
-      id: 1,
-      name: "John Doe",
-      age: 18,
-      grade: "A",
-      email: "john@example.com",
-      enrollment: "202301",
-      dob: "2005-05-15",
-      guardians: "John Doe Sr., Jane Doe",
-      contact: "123-456-7890",
-      class: "12th Grade",
-      attendance: "95%",
-       
-    },
-    {
-      id: 1,
-      name: "John Doe",
-      age: 18,
-      grade: "A",
-      email: "john@example.com",
-      enrollment: "202301",
-      dob: "2005-05-15",
-      guardians: "John Doe Sr., Jane Doe",
-      contact: "123-456-7890",
-      class: "12th Grade",
-      attendance: "95%",
-       
-    },
-    {
-      id: 1,
-      name: "John Doe",
-      age: 18,
-      grade: "A",
-      email: "john@example.com",
-      enrollment: "202301",
-      dob: "2005-05-15",
-      guardians: "John Doe Sr., Jane Doe",
-      contact: "123-456-7890",
-      class: "12th Grade",
-      attendance: "95%",
-       
     },
     {
       id: 2,
@@ -149,7 +66,6 @@ const StudentCard = (props) => {
       contact: "987-654-3210",
       class: "11th Grade",
       attendance: "92%",
-       
     },
     // Add more student details as needed
   ];
@@ -181,9 +97,12 @@ const StudentCard = (props) => {
               {Students.map((student) => (
                 <TableRow key={student.enrollment}>
                   <TableCell>
-                    <Avatar alt={student.name} src={student.avatar?student.avatar:student.name} />
+                    <Avatar
+                      alt={student.name}
+                      src={student.avatar ? student.avatar : student.name}
+                    />
                   </TableCell>
-                  {console.log(student.name)}
+
                   <TableCell>{student.enrollment}</TableCell>
                   <TableCell>{student.name}</TableCell>
                   <TableCell>{student.age}</TableCell>
@@ -194,23 +113,31 @@ const StudentCard = (props) => {
                   <TableCell>{student.class}</TableCell>
                   <TableCell>{student.attendance}</TableCell>
                   <TableCell sx={{ padding: "12px" }}>
-                    <FaRegPenToSquare
-                      variant="outlined"
-                      color="primary"
-                      className="StudentActions updateButton"
-                      onClick={() => handleUpdate(student.id)}
-                      style={{ marginRight: "12px" }}
+                    <IconButton onClick={(e) => openMenu(e, student)}>
+                      <MoreVertIcon />
+                    </IconButton>
+
+                    <Menu
+                      id="action-menu"
+                      anchorEl={anchorEl}
+                      keepMounted
+                      open={Boolean(anchorEl) && selectedStudent === student}
+                      onClose={handleMenuClose}
+                      PaperProps={{
+                        elevation: 1,
+                        style: {
+                          border: "1px solid #ccc", // Add your border style here
+                          marginRight: "20px", // Add margin here
+                        },
+                      }}
                     >
-                      Update
-                    </FaRegPenToSquare>
-                    <FaTrash
-                      variant="outlined"
-                      color="secondary"
-                      className="StudentActions deleteButton"
-                      onClick={() => handleDelete(student.id)}
-                    >
-                      Delete
-                    </FaTrash>
+                      {/* {console.log(selectedStudent, student)} */}
+                      <MenuItem onClick={() => handleUpdate(student)}>
+                        Update
+                      </MenuItem>
+                      <MenuItem onClick={handleMenuClose}>My Account</MenuItem>
+                      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+                    </Menu>
                   </TableCell>
                 </TableRow>
               ))}

@@ -12,6 +12,7 @@ import AdminState from './Context/Admin/AdminState'
 import StudentCard from './Component/Admin/StudentCard';
 import TeacherListDash from './Pages/Admin/TeacherListDash';
 import AttendanceComponent from './Component/Admin/AttendanceComponent';
+import RecordMarks from './Component/Admin/RecordMarks';
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
       <Navbar/>
       <Sidebar>
       <Routes>
-        <Route path="/" element={<AttendanceComponent/>}></Route>
+        <Route path="/" element={<RecordMarks/>}></Route>
         <Route path="/admin" element={<Home/>}></Route>
         <Route path="admin/students/management/studentList" element={<StudentCard/>}></Route>
         <Route path="admin/students/management/attendanceReport" element={<AttendanceComponent/>}></Route>
