@@ -18,28 +18,36 @@ import {
 import React, { useState } from "react";
 
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { useNavigate  } from 'react-router-dom';
+
 
 const StudentCard = (props) => {
+  const navigate=useNavigate()
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedStudent, setSelectedStudent] = useState(null);
 
-  const openMenu = (event, student) => {
-    setAnchorEl(event.currentTarget);
-    setSelectedStudent(student);
+  const openMenu = (event, index) => {
+    setAnchorEl(event.target);
+    setSelectedStudent(index);
   };
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+    setSelectedStudent(null);
   };
 
   const handleUpdate = (student) => {
-    console.log("updateStudentCard", student.id);
+    console.log("updateStudentCard", student);
     handleMenuClose();
   };
+
   const handleDelete = (id) => {
     console.log("deleteStudentCard");
   };
 
+  const handleMarks = (id) =>{
+    navigate(`/record-marks/${id}`);
+  }
   const Students = [
     {
       id: 1,
@@ -71,6 +79,7 @@ const StudentCard = (props) => {
   ];
 
   return (
+
     <Card sx={{ width: "100%", overflowX: "auto" }}>
       <CardContent>
         <Typography component="h1" variant="h5">
@@ -94,7 +103,7 @@ const StudentCard = (props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {Students.map((student) => (
+              {Students.map((student, index) => (
                 <TableRow key={student.enrollment}>
                   <TableCell>
                     <Avatar
@@ -113,7 +122,7 @@ const StudentCard = (props) => {
                   <TableCell>{student.class}</TableCell>
                   <TableCell>{student.attendance}</TableCell>
                   <TableCell sx={{ padding: "12px" }}>
-                    <IconButton onClick={(e) => openMenu(e, student)}>
+                    <IconButton onClick={(e) => openMenu(e, index)}>
                       <MoreVertIcon />
                     </IconButton>
 
@@ -121,22 +130,26 @@ const StudentCard = (props) => {
                       id="action-menu"
                       anchorEl={anchorEl}
                       keepMounted
-                      open={Boolean(anchorEl) && selectedStudent === student}
+                      open={Boolean(anchorEl) && selectedStudent !== null}
                       onClose={handleMenuClose}
                       PaperProps={{
                         elevation: 1,
                         style: {
-                          border: "1px solid #ccc", // Add your border style here
-                          marginRight: "20px", // Add margin here
+                          border: "1px solid #ccc",
+                          marginRight: "20px",
                         },
                       }}
                     >
-                      {/* {console.log(selectedStudent, student)} */}
-                      <MenuItem onClick={() => handleUpdate(student)}>
+                      {console.log(selectedStudent)}
+                      <MenuItem
+                        onClick={() =>
+                          handleUpdate(Students[selectedStudent])
+                        }
+                      >
                         Update
                       </MenuItem>
-                      <MenuItem onClick={handleMenuClose}>My Account</MenuItem>
-                      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+                      <MenuItem onClick={()=>handleMarks(Students[selectedStudent].id)}>Record Marks</MenuItem>
+                      <MenuItem onClick={()=>handleDelete(Students[selectedStudent])}>Logout</MenuItem>
                     </Menu>
                   </TableCell>
                 </TableRow>

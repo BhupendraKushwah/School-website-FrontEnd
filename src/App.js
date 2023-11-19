@@ -26,6 +26,7 @@ function App() {
         <Route path="/admin" element={<Home/>}></Route>
         <Route path="admin/students/management/studentList" element={<StudentCard/>}></Route>
         <Route path="admin/students/management/attendanceReport" element={<AttendanceComponent/>}></Route>
+        <Route path="/record-marks/:id" element={<RecordMarks />} />
         <Route path="admin/teacher/management/teacherList" element={<TeacherListDash/>}></Route>
         <Route path="admin/logout" element={<LoginPage/>}></Route>
         <Route path="admin/student" element={<Students/>}></Route>

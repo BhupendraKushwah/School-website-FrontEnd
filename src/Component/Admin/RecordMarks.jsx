@@ -15,28 +15,55 @@ import {
     Divider,
   } from '@mui/material';
   import DeleteIcon from '@mui/icons-material/Delete';
+  import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const RecordMarks = () => {
   const [year, setYear] = useState('');
   const [examName, setExamName] = useState('');
   const [result, setResult] = useState('Pass');
   const [subjectMarks, setSubjectMarks] = useState([]);
+  const [foundStudent, setFoundStudent] = useState([]);
+  const { id } = useParams();
 
-  const studentData =  {
-    id: 1,
-    name: "John Doe",
-    age: 18,
-    grade: "A",
-    email: "john@example.com",
-    enrollment: "202301",
-    dob: "2005-05-15",
-    guardians: "John Doe Sr., Jane Doe",
-    contact: "123-456-7890",
-    class: "12th Grade",
-    attendance: "95%",
-     
-  };
+  const studentData = [
+    {
+      id: 1,
+      name: "John Doe",
+      age: 18,
+      grade: "A",
+      email: "john@example.com",
+      enrollment: "202301",
+      dob: "2005-05-15",
+      guardians: "John Doe Sr., Jane Doe",
+      contact: "123-456-7890",
+      class: "12th Grade",
+      attendance: "95%",
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      age: 17,
+      grade: "B",
+      email: "jane@example.com",
+      enrollment: "202302",
+      dob: "2006-07-20",
+      guardians: "Mark Smith, Emily Smith",
+      contact: "987-654-3210",
+      class: "11th Grade",
+      attendance: "92%",
+    },
+    // Add more student details as needed
+  ];
 
+  useEffect(() => {
+    const foundStudent = studentData.find(student => student.id === Number(id));
+  
+    if (foundStudent) {
+      setFoundStudent(foundStudent);
+    }
+    
+  }, [id, studentData])
   const handleAddSubject = () => {
     setSubjectMarks([...subjectMarks, { subject: '', marks: 0 }]);
   };
@@ -96,7 +123,7 @@ const RecordMarks = () => {
   return (
 
     <Container maxWidth="sm">
-        {console.log(studentData.id)}
+        
       <Paper elevation={3} style={{ padding: '20px', marginTop: '20px', backgroundColor: '#f8f8f8' }}>
         <Typography variant="h5" align="center" gutterBottom style={{ color: '#333' }}>
           Add Marks
@@ -108,7 +135,7 @@ const RecordMarks = () => {
               <TextField
                 label="Student Name"
                 type="text"
-                value={studentData.name}
+                value={foundStudent.name}
                 // onChange={(e) => setYear(e.target.value)}
                 fullWidth
                 variant="outlined"
@@ -118,7 +145,7 @@ const RecordMarks = () => {
               <TextField
                 label="Enrollment Number"
                 type="text"
-                value={studentData.enrollment}
+                value={foundStudent.enrollment}
                 // onChange={(e) => setYear(e.target.value)}
                 fullWidth
                 variant="outlined"
