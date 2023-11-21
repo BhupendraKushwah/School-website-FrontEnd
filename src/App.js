@@ -13,6 +13,8 @@ import StudentCard from './Component/Admin/StudentCard';
 import TeacherListDash from './Pages/Admin/TeacherListDash';
 import AttendanceComponent from './Component/Admin/AttendanceComponent';
 import RecordMarks from './Component/Admin/RecordMarks';
+import Signup from './Component/Admin/RecordAttendance';
+import TeacherAttendance from './Pages/Admin/TeacherAttendance';
 
 function App() {
   return (
@@ -28,7 +30,7 @@ function App() {
         <Route path="admin/students/management/attendanceReport" element={<AttendanceComponent/>}></Route>
         <Route path="/record-marks/:id" element={<RecordMarks />} />
         <Route path="admin/teacher/management/teacherList" element={<TeacherListDash/>}></Route>
-        <Route path="admin/logout" element={<LoginPage/>}></Route>
+        <Route path="admin/logout" element={<TeacherAttendance/>}></Route>
         <Route path="admin/student" element={<Students/>}></Route>
       </Routes>
       </Sidebar>

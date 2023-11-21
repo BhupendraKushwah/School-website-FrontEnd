@@ -17,7 +17,8 @@ const TeacherCard = ({ teacher }) => {
         <CardContent>
           <Grid container spacing={2} alignItems="center">
             <Grid item xs={4} sm={3} md={2} lg={1}>
-              <Avatar>R</Avatar>
+           
+              <Avatar>{teacher.name[0]}</Avatar>
             </Grid>
             <Grid item xs={8} sm={9} md={10} lg={11}>
               <Box sx={{ px: { xs: 1, sm: 3 }, textAlign: { xs: 'center', sm: 'left' } }} className="card-data">
