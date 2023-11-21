@@ -5,7 +5,6 @@ import Sidebar from "./Component/Admin/Sidebar";
 import Home from "./Pages/Admin/Home";
 
 import Students from "./Pages/Admin/Students";
-import LoginPage from './Pages/Admin/LoginPage';
 import Navbar from './Component/Admin/Navbar';
 import SidebarState from './Context/SidebarContext/SidebarState';
 import AdminState from './Context/Admin/AdminState'
@@ -13,7 +12,6 @@ import StudentCard from './Component/Admin/StudentCard';
 import TeacherListDash from './Pages/Admin/TeacherListDash';
 import AttendanceComponent from './Component/Admin/AttendanceComponent';
 import RecordMarks from './Component/Admin/RecordMarks';
-import Signup from './Component/Admin/RecordAttendance';
 import TeacherAttendance from './Pages/Admin/TeacherAttendance';
 
 function App() {
