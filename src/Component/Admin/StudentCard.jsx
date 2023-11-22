@@ -140,7 +140,7 @@ const StudentCard = (props) => {
                         },
                       }}
                     >
-                      {console.log(selectedStudent)}
+                      
                       <MenuItem
                         onClick={() =>
                           handleUpdate(Students[selectedStudent])

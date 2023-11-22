@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   FaTh,
   FaChalkboardTeacher,
@@ -11,11 +11,14 @@ import { MdFeedback } from "react-icons/md";
 
 import { NavLink } from "react-router-dom";
 import SidebarContext from "../../Context/SidebarContext/SidebarContext";
+import AdminContext from "../../Context/Admin/AdminContext";
 
 const Sidebar = ({ children }) => {
-
-  const context =useContext(SidebarContext)
-  const {isOpen,openSubmenuIndex,setOpenSubmenuIndex}=context
+  const [Routedate, setRouteDate] = useState("");
+  const context = useContext(SidebarContext);
+  const context2 = useContext(AdminContext);
+  const { isOpen, openSubmenuIndex, setOpenSubmenuIndex } = context;
+  const { getCurrentDate } = context2;
 
   const toggleManagement = (index) => {
     if (openSubmenuIndex === index) {
@@ -25,6 +28,11 @@ const Sidebar = ({ children }) => {
     }
   };
 
+  useEffect(() => {
+    const currentDate = getCurrentDate();
+    setRouteDate(currentDate);
+  });
+
   const menuItem = [
     {
       path: "admin/",
@@ -32,7 +40,6 @@ const Sidebar = ({ children }) => {
       icon: <FaTh />,
     },
     {
-      path: "admin/students/management",
       name: "Students Management",
       icon: <FaUserAlt />,
       submenu: [
@@ -41,14 +48,12 @@ const Sidebar = ({ children }) => {
           path: "admin/students/management/attendanceReport",
           name: "Attendance Report",
         },
-        { path: "admin/students/management/record-marks", name: "Record Marks" },
         { path: "admin/students/management/get-marks", name: "Fetch Marks" },
       ],
     },
     {
-      path: "/teacher/management",
       name: "Teacher Management",
-      icon: <  FaChalkboardTeacher />,
+      icon: <FaChalkboardTeacher />,
       submenu: [
         { path: "admin/teacher/management/teacherList", name: "Teacher List" },
         {
@@ -57,10 +62,10 @@ const Sidebar = ({ children }) => {
         },
         {
           path: "admin/teacher/management/TeacherRegisterAttendee",
-          name: "Teacher Attendance",
+          name: "Record Attendance",
         },
         {
-          path: "admin/teacher/management/TeacherAttendanceReport",
+          path: `admin/teacher/management/TeacherAttendanceReport/${Routedate}`,
           name: "Attendance Report",
         },
       ],
@@ -86,12 +91,10 @@ const Sidebar = ({ children }) => {
       icon: <FaSignOutAlt />,
     },
   ];
-  
 
   return (
     <div className="container">
       <div style={{ width: isOpen ? "300px" : "70px" }} className="sidebar">
-        
         {menuItem.map((item, index) => (
           <div key={index}>
             {item.submenu ? (

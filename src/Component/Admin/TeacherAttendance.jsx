@@ -47,38 +47,21 @@ const StyledTableRow = styled(TableRow)({
   },
 });
 
-const AttendanceComponent = ({ role }) => {
+const TeacherAttendance = ({role}) => {
+
   const context = useContext(AdminContext);
 
-  const { fetchAttendanceData, studentData, filteredAttendanceList } = context;
-
-  const [selectedClass, setSelectedClass] = useState("Nursery");
-
-  const setAllClasses = ["Nursery", "LKG", "UKG"];
-
-  const dataToRender =
-    filteredAttendanceList.length > 0 ? filteredAttendanceList : studentData;
+  const { fetchAttendanceData, teacherData, filteredList } = context;
 
   useEffect(() => {
     fetchAttendanceData(role);
-    
   }, []);
 
-  //for set all class in dropdown
-  for (let i = 1; i <= 12; i++) {
-    setAllClasses.push(`Class ${i}`);
-  }
 
-  // sortList the data by class using dropdown
-  const sortedList = dataToRender.filter((student) => {
-    return student.AttendanceByDate[0].Class === selectedClass;
-});
+  const dataToRender =
+    (filteredList.length > 0) ? filteredList : teacherData;
 
-  // onchange event on clicking dropdown to set class
-  const handleClassChange = (event) => {
-    setSelectedClass(event.target.value);
-  };
-
+  
   // Calculate the Attendance in percentage
   const calculateAttendancePercentage = (attendanceByDate) => {
     const totalDays = attendanceByDate.length;
@@ -92,9 +75,10 @@ const AttendanceComponent = ({ role }) => {
     return ((presentDays / totalDays) * 100).toFixed(2);
   };
 
-  // get the Student name from StudentId
-  const getStudentName = (id) => {
-    return id; // Replace with your logic to get the student name
+
+  // get the teacher name from teacherId
+  const getTeacherName = (id) => {
+    return id; // Replace with your logic to get the teacher name
   };
 
   // get the total days of attendance
@@ -113,34 +97,14 @@ const AttendanceComponent = ({ role }) => {
         <Typography variant="h5" component="h1" color="inherit" gutterBottom>
           Attendance Report
         </Typography>
-        <Stack
-          direction={{ xs: "column", sm: "row" }}
-          justifyContent="space-between"
-          alignItems={{ xs: "stretch", sm: "center" }}
-          margin={2}
-        >
-          <FormControl style={{ marginBottom: 16, minWidth: 120 }}>
-            <Select
-              id="class-select"
-              value={selectedClass}
-              onChange={handleClassChange}
-            >
-              {setAllClasses.map((classItem) => (
-                <MenuItem key={classItem} value={classItem}>
-                  {classItem}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <SearchComponent user={"Attendance"} />
-        </Stack>
+          <SearchComponent user={"teacher"} />
         <StyledTableContainer component={Paper}>
           <Table>
             <TableHead>
               <StyledTableRow>
-                <StyledTableHeaderCell>StudentId</StyledTableHeaderCell>
-                <StyledTableHeaderCell>Student Name</StyledTableHeaderCell>
-                <StyledTableHeaderCell>Class</StyledTableHeaderCell>
+                <StyledTableHeaderCell>TeacherId</StyledTableHeaderCell>
+                <StyledTableHeaderCell>Teacher Name</StyledTableHeaderCell>
+
                 <StyledTableHeaderCell>Attendance (%)</StyledTableHeaderCell>
                 <StyledTableHeaderCell>Total Days</StyledTableHeaderCell>
                 <StyledTableHeaderCell>Present Days</StyledTableHeaderCell>
@@ -148,29 +112,29 @@ const AttendanceComponent = ({ role }) => {
               </StyledTableRow>
             </TableHead>
             <TableBody>
-              {sortedList.length === 0 ? (
+                {console.log(filteredList)}
+              {filteredList==="Not Found" ? (
                 <StyledTableRow>
                   <TableCell colSpan={7} align="center" marginTop="5px">
                     No Data
                   </TableCell>
                 </StyledTableRow>
               ) : (
-                sortedList.map((student) => (
-                  <StyledTableRow key={student._id}>
-                    <TableCell>{student.StudentId}</TableCell>
-                    <TableCell>{getStudentName(student.StudentId)}</TableCell>
-                    <TableCell>{student.AttendanceByDate[0].Class}</TableCell>
+                dataToRender.map((teacher) => (
+                    <StyledTableRow key={teacher._id}>
+                    <TableCell>{teacher.TeacherId}</TableCell>
+                    <TableCell>{getTeacherName(teacher.TeacherId)}</TableCell>
                     <TableCell>
-                      {calculateAttendancePercentage(student.AttendanceByDate)}%
+                      {calculateAttendancePercentage(teacher.AttendanceByDate)}%
                     </TableCell>
                     <TableCell>
-                      {getTotalDays(student.AttendanceByDate)}
+                      {getTotalDays(teacher.AttendanceByDate)}
                     </TableCell>
                     <TableCell>
-                      {getPresentDays(student.AttendanceByDate)}
+                      {getPresentDays(teacher.AttendanceByDate)}
                     </TableCell>
                     <TableCell>
-                      {getAbsentDays(student.AttendanceByDate)}
+                      {getAbsentDays(teacher.AttendanceByDate)}
                     </TableCell>
                   </StyledTableRow>
                 ))
@@ -183,4 +147,4 @@ const AttendanceComponent = ({ role }) => {
   );
 };
 
-export default AttendanceComponent;
+export default TeacherAttendance;

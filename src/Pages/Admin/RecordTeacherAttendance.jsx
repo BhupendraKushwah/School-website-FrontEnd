@@ -1,7 +1,7 @@
 import React from 'react'
 import RecordAttendance from '../../Component/Admin/RecordAttendance'
 
-const TeacherAttendance = () => {
+const RecordTeacherAttendance = () => {
 
     const teachersData = [
         {
@@ -71,4 +71,4 @@ const TeacherAttendance = () => {
   )
 }
 
-export default TeacherAttendance
+export default RecordTeacherAttendance
