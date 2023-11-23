@@ -55,7 +55,7 @@ const TeacherAttendance = ({role}) => {
 
   useEffect(() => {
     fetchAttendanceData(role);
-  }, []);
+  }, [role]);
 
 
   const dataToRender =
@@ -112,11 +112,11 @@ const TeacherAttendance = ({role}) => {
               </StyledTableRow>
             </TableHead>
             <TableBody>
-                {console.log(filteredList)}
-              {filteredList==="Not Found" ? (
+               
+              {filteredList==="Not Found"||teacherData.success==="false" ? (
                 <StyledTableRow>
                   <TableCell colSpan={7} align="center" marginTop="5px">
-                    No Data
+                    {filteredList==="Not Found"?"Data Not Found":teacherData.data}
                   </TableCell>
                 </StyledTableRow>
               ) : (
