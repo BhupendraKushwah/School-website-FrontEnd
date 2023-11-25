@@ -19,12 +19,17 @@ import React, { useState } from "react";
 
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useNavigate  } from 'react-router-dom';
+import { useEffect } from "react";
+import { useContext } from "react";
+import AdminContext from "../../Context/Admin/AdminContext";
 
 
 const StudentCard = (props) => {
   const navigate=useNavigate()
   const [anchorEl, setAnchorEl] = useState(null);
-  const [selectedStudent, setSelectedStudent] = useState(null);
+  const [selectedStudent, setSelectedStudent,] = useState(null);
+  const context=useContext(AdminContext)
+  const {fetchUser,allStudent}=context
 
   const openMenu = (event, index) => {
     setAnchorEl(event.target);
@@ -48,35 +53,24 @@ const StudentCard = (props) => {
   const handleMarks = (id) =>{
     navigate(`/record-marks/${id}`);
   }
-  const Students = [
-    {
-      id: 1,
-      name: "John Doe",
-      age: 18,
-      grade: "A",
-      email: "john@example.com",
-      enrollment: "202301",
-      dob: "2005-05-15",
-      guardians: "John Doe Sr., Jane Doe",
-      contact: "123-456-7890",
-      class: "12th Grade",
-      attendance: "95%",
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      age: 17,
-      grade: "B",
-      email: "jane@example.com",
-      enrollment: "202302",
-      dob: "2006-07-20",
-      guardians: "Mark Smith, Emily Smith",
-      contact: "987-654-3210",
-      class: "11th Grade",
-      attendance: "92%",
-    },
-    // Add more student details as needed
-  ];
+  
+
+  useEffect(()=>{
+    const fetchData = async () => {
+      try {
+        await fetchUser("student");
+        console.log(allStudent)
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+  
+    fetchData();
+  },[])
+
+  useEffect(() => {
+    
+  }, [allStudent]);
 
   return (
 
@@ -92,35 +86,35 @@ const StudentCard = (props) => {
                 <TableCell>Avatar</TableCell>
                 <TableCell>Student Id</TableCell>
                 <TableCell>Name</TableCell>
-                <TableCell>Age</TableCell>
+                <TableCell>Address</TableCell>
                 <TableCell>Email</TableCell>
                 <TableCell>DoB</TableCell>
                 <TableCell>Gaurdian's Name</TableCell>
                 <TableCell>Contact</TableCell>
                 <TableCell>Class</TableCell>
-                <TableCell>Attendance</TableCell>
+                <TableCell>Fees</TableCell>
                 <TableCell>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {Students.map((student, index) => (
-                <TableRow key={student.enrollment}>
+              {allStudent.map((student, index) => (
+                <TableRow key={student._id}>
                   <TableCell>
                     <Avatar
-                      alt={student.name}
-                      src={student.avatar ? student.avatar : student.name}
+                      alt={student.Name}
+                      src={student.Image ? student.Image : student.Name}
                     />
                   </TableCell>
 
-                  <TableCell>{student.enrollment}</TableCell>
-                  <TableCell>{student.name}</TableCell>
-                  <TableCell>{student.age}</TableCell>
-                  <TableCell>{student.email}</TableCell>
-                  <TableCell>{student.dob}</TableCell>
-                  <TableCell>{student.guardians}</TableCell>
-                  <TableCell>{student.contact}</TableCell>
-                  <TableCell>{student.class}</TableCell>
-                  <TableCell>{student.attendance}</TableCell>
+                  <TableCell>{student.Enrollment}</TableCell>
+                  <TableCell>{student.Name}</TableCell>
+                  <TableCell>{student.Address}</TableCell>
+                  <TableCell>{student.Email}</TableCell>
+                  <TableCell>{student.DOB}</TableCell>
+                  <TableCell>{student.Guardians}</TableCell>
+                  <TableCell>{student.Contact}</TableCell>
+                  <TableCell>{student.Class}</TableCell>
+                  <TableCell>{student.Fees}</TableCell>
                   <TableCell sx={{ padding: "12px" }}>
                     <IconButton onClick={(e) => openMenu(e, index)}>
                       <MoreVertIcon />
@@ -143,13 +137,13 @@ const StudentCard = (props) => {
                       
                       <MenuItem
                         onClick={() =>
-                          handleUpdate(Students[selectedStudent])
+                          handleUpdate(allStudent[selectedStudent])
                         }
                       >
                         Update
                       </MenuItem>
-                      <MenuItem onClick={()=>handleMarks(Students[selectedStudent].id)}>Record Marks</MenuItem>
-                      <MenuItem onClick={()=>handleDelete(Students[selectedStudent])}>Logout</MenuItem>
+                      <MenuItem onClick={()=>handleMarks(allStudent[selectedStudent].id)}>Record Marks</MenuItem>
+                      <MenuItem onClick={()=>handleDelete(allStudent[selectedStudent])}>Logout</MenuItem>
                     </Menu>
                   </TableCell>
                 </TableRow>

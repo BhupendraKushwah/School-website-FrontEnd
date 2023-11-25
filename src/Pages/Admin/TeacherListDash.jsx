@@ -15,17 +15,22 @@ import AdminContext from "../../Context/Admin/AdminContext";
 const TeacherListDash = () => {
     const theme=useTheme()
     const context =useContext(AdminContext)
-    const {filteredList,teacherData, setTeacherData} =context
+    const {filteredList,teacherData, allTeacher,fetchUser} =context
   
  useEffect(()=>{
-  const fetchTeacher=async ()=>{
-    const response = await fetch("/teacherData.json")
-    const data= await response.json();
-    setTeacherData(data)
-
+  const fetchData=async()=>{
+      try {
+        fetchUser("teacher")
+      } catch (error) {
+        console.log(error)
+      }
   }
-  fetchTeacher()
- })
+  fetchData()
+ },[])
+
+ useEffect(()=>{
+
+ },[allTeacher])
   
 
   return (
@@ -53,7 +58,7 @@ const TeacherListDash = () => {
           ? filteredList.map((teacher) => {
               return <TeacherCard teacher={teacher} key={teacher.id} />
         })
-          : teacherData.map((teacher) => {
+          : allTeacher.map((teacher) => {
             return <TeacherCard teacher={teacher} key={teacher.id} />
       })}
       </Grid>
