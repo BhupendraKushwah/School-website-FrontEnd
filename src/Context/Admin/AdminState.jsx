@@ -84,6 +84,24 @@ const AdminState = (props) => {
     }
   };
 
+  const handleFetchMarks=async(id)=>{
+    console.log(id)
+    const url=`http://localhost:5000/admin/students/get-marks/2024/${id}`
+    try{
+    const response=await fetch(url,{
+      headers:{
+        Auth_Token:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjU0MGZiMGFmZWUyMDVlZWY4ZjYyNTRjIiwiUm9sZSI6ImFkbWluIiwiaWF0IjoxNjk4NzYyNzE1fQ.Jwx5l5OVoZFn4Yc4BfX6q_rS3rvv2mQy9BE0jbDD5wU"
+      },
+    })
+    const result =await response.json();
+    console.log(result);
+    }
+    catch (e) {
+      console.log(e,)
+    }
+  }
+
   return (
     <div>
       <AdminContext.Provider
@@ -105,6 +123,7 @@ const AdminState = (props) => {
           setAllStudent,
           allTeacher,
           setAllTeacher,
+          handleFetchMarks
         }}
       >
         {props.children}

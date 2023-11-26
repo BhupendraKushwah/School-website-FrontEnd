@@ -2,14 +2,15 @@
 import React from 'react';
 import Chart from 'react-google-charts';
 
-const BarChart = ({ studentData }) => {
+const BarChart = ({ allStudent }) => {
   // Group students by year and calculate the total for each year
-  const yearlyTotal = studentData.reduce((acc, student) => {
+  const yearlyTotal = allStudent.reduce((acc, student) => {
     const enrollmentYear = new Date(student.EnrollmentDate).getFullYear();
     acc[enrollmentYear] = (acc[enrollmentYear] || 0) + 1;
     return acc;
   }, {});
 
+  
   // Format data for the BarChart
   const chartData = [['Year', 'Total Students']];
   Object.entries(yearlyTotal).forEach(([year, total]) => {
@@ -32,8 +33,8 @@ const BarChart = ({ studentData }) => {
       }}
       width="100%"
       height="400px"
-    />
-  );
+      />
+      );
 };
 
 export default BarChart;

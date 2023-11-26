@@ -18,18 +18,17 @@ import {
 import React, { useState } from "react";
 
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useContext } from "react";
 import AdminContext from "../../Context/Admin/AdminContext";
 
-
 const StudentCard = (props) => {
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
-  const [selectedStudent, setSelectedStudent,] = useState(null);
-  const context=useContext(AdminContext)
-  const {fetchUser,allStudent}=context
+  const [selectedStudent, setSelectedStudent] = useState(null);
+  const context = useContext(AdminContext);
+  const { fetchUser, allStudent,handleFetchMarks } = context;
 
   const openMenu = (event, index) => {
     setAnchorEl(event.target);
@@ -50,30 +49,25 @@ const StudentCard = (props) => {
     console.log("deleteStudentCard");
   };
 
-  const handleMarks = (id) =>{
+  const handleRecordMarks = (id) => {
     navigate(`/record-marks/${id}`);
-  }
-  
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     const fetchData = async () => {
       try {
         await fetchUser("student");
-        console.log(allStudent)
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-  
-    fetchData();
-  },[])
 
-  useEffect(() => {
-    
-  }, [allStudent]);
+    fetchData();
+  }, []);
+
+  useEffect(() => {}, [allStudent]);
 
   return (
-
     <Card sx={{ width: "100%", overflowX: "auto" }}>
       <CardContent>
         <Typography component="h1" variant="h5">
@@ -134,7 +128,6 @@ const StudentCard = (props) => {
                         },
                       }}
                     >
-                      
                       <MenuItem
                         onClick={() =>
                           handleUpdate(allStudent[selectedStudent])
@@ -142,8 +135,27 @@ const StudentCard = (props) => {
                       >
                         Update
                       </MenuItem>
-                      <MenuItem onClick={()=>handleMarks(allStudent[selectedStudent].id)}>Record Marks</MenuItem>
-                      <MenuItem onClick={()=>handleDelete(allStudent[selectedStudent])}>Logout</MenuItem>
+                      <MenuItem
+                        onClick={() =>
+                          handleRecordMarks(allStudent[selectedStudent]._id)
+                        }
+                      >
+                        Record Marks
+                      </MenuItem>
+                      <MenuItem
+                        onClick={() =>
+                          handleFetchMarks(allStudent[selectedStudent]._id)
+                        }
+                      >
+                        Show Marks
+                      </MenuItem>
+                      <MenuItem
+                        onClick={() =>
+                          handleDelete(allStudent[selectedStudent])
+                        }
+                      >
+                        Logout
+                      </MenuItem>
                     </Menu>
                   </TableCell>
                 </TableRow>
