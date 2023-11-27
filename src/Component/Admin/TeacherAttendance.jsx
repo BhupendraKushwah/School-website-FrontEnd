@@ -11,7 +11,7 @@ import {
   TableBody,
   Typography,
   styled,
-  FormControl,
+  Button,
   Select,
   MenuItem,
   Stack,
@@ -47,24 +47,34 @@ const StyledTableRow = styled(TableRow)({
   },
 });
 
-const TeacherAttendance = ({role}) => {
-
+const TeacherAttendance = ({ role }) => {
   const context = useContext(AdminContext);
 
-  const { fetchAttendanceData, teacherData, filteredList } = context;
+  const {
+    fetchAttendanceData,
+    teacherData,
+    filteredList,
+    fetchUser,
+    allTeacher,
+  } = context;
 
   useEffect(() => {
-    fetchAttendanceData(role);
-  }, [role]);
+    const fetchData = async () => {
+      try {
+        await fetchAttendanceData("teacher");
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
+    fetchData();
+  }, []);
 
-  const dataToRender =
-    (filteredList.length > 0) ? filteredList : teacherData;
+  const dataToRender = filteredList ? filteredList : teacherData.data;
 
-  
   // Calculate the Attendance in percentage
   const calculateAttendancePercentage = (attendanceByDate) => {
-    const totalDays = attendanceByDate.length;
+    const totalDays =attendanceByDate.length;
     const presentDays = attendanceByDate.filter(
       (day) => day.Status === "Present"
     ).length;
@@ -73,13 +83,11 @@ const TeacherAttendance = ({role}) => {
       return 0;
     }
     return ((presentDays / totalDays) * 100).toFixed(2);
-  };
+  }
 
+  
 
-  // get the teacher name from teacherId
-  const getTeacherName = (id) => {
-    return id; // Replace with your logic to get the teacher name
-  };
+  
 
   // get the total days of attendance
   const getTotalDays = (attendanceByDate) => attendanceByDate.length;
@@ -97,7 +105,8 @@ const TeacherAttendance = ({role}) => {
         <Typography variant="h5" component="h1" color="inherit" gutterBottom>
           Attendance Report
         </Typography>
-          <SearchComponent user={"teacher"} />
+        <SearchComponent user={"teacher"} />
+        <Button variant="outlined" color="error">Clear Search</Button>
         <StyledTableContainer component={Paper}>
           <Table>
             <TableHead>
@@ -111,19 +120,24 @@ const TeacherAttendance = ({role}) => {
                 <StyledTableHeaderCell>Absent Days</StyledTableHeaderCell>
               </StyledTableRow>
             </TableHead>
+            {console.log(filteredList)}
             <TableBody>
-               
-              {filteredList==="Not Found"||teacherData.success==="false" ? (
+              {filteredList === "Not Found" ||
+              teacherData.success === "false" ||
+              dataToRender === undefined ? (
                 <StyledTableRow>
                   <TableCell colSpan={7} align="center" marginTop="5px">
-                    {filteredList==="Not Found"?"Data Not Found":teacherData.data}
+                    {filteredList === "Not Found"
+                      ? "Data Not Found"
+                      : teacherData.data}
                   </TableCell>
                 </StyledTableRow>
               ) : (
                 dataToRender.map((teacher) => (
-                    <StyledTableRow key={teacher._id}>
+                  <StyledTableRow key={teacher._id}>
+               
                     <TableCell>{teacher.TeacherId}</TableCell>
-                    <TableCell>{getTeacherName(teacher.TeacherId)}</TableCell>
+                    <TableCell>{teacher.TeacherName}</TableCell>
                     <TableCell>
                       {calculateAttendancePercentage(teacher.AttendanceByDate)}%
                     </TableCell>

@@ -81,11 +81,9 @@ const RecordMarks = () => {
   
       } else {
         alert(result);
-        // Handle error cases
       }
     } catch (error) {
       console.error("Error:", error);
-      // Handle network or other errors
     }
   };
   const handleSubmit = async (e) => {

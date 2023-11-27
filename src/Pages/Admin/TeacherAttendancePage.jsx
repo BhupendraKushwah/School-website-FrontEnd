@@ -4,7 +4,7 @@ import TeacherAttendance from '../../Component/Admin/TeacherAttendance'
 
 const TeacherAttendancePage = () => {
   return (
-    <TeacherAttendance/>
+    <TeacherAttendance role={"teacher"}/>
   )
 }
 

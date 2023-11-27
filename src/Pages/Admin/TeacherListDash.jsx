@@ -28,9 +28,6 @@ const TeacherListDash = () => {
   fetchData()
  },[])
 
- useEffect(()=>{
-
- },[allTeacher])
   
 
   return (

@@ -25,13 +25,14 @@ const AdminState = (props) => {
         },
       });
       const data = await response.json();
+
+      
       if (role === "student") {
         setStudentData(data);
       } else {
         const successData = data.message
           ? { success: "false", data: data.message }
           : { success: "true", data: data };
-
         setTeacherData(successData);
       }
     } catch (error) {
@@ -40,13 +41,16 @@ const AdminState = (props) => {
   };
 
   const handleSearch = (user) => {
+    
     if (user === "teacher") {
-      const filtered = teacherData.filter((teacher) =>
-        teacher.TeacherId.includes(searchTerm)
+      console.log(teacherData.data)
+      const filtered = teacherData.data.filter((teacher) =>
+      teacher.TeacherName.toLowerCase().includes(searchTerm.toLowerCase())
+
       );
-      if (filtered.length > 0) {
+      if (filtered.length>0) {
         setFilteredList(filtered);
-        // setSearchTerm("")
+        setSearchTerm("")
       } else {
         setFilteredList("Not Found");
       }

@@ -18,7 +18,7 @@ import {
 } from "@mui/material";
 import { Delete } from "@mui/icons-material";
 
-const RecordAttendance = ({ userData, Role }) => {
+const RecordAttendance =  ({ userData, Role }) => {
   const [attendance, setAttendance] = useState({});
   const [currentTime, setCurrentTime] = useState(new Date());
 
@@ -29,19 +29,35 @@ const RecordAttendance = ({ userData, Role }) => {
     }));
   };
 
-  const handleSaveAttendance = () => {
+  const handleSaveAttendance =async () => {
     const formattedAttendance = userData.map((user) => {
+      console.log(user._id)
       return {
-        "User Name": user.Name,
-        Status: attendance[user._id] ? "Present" : "Absent",
+        "TeacherName": user.Name,
+        "TeacherId":user._id,
+        "Status": attendance[user._id] ? "Present" : "Absent",
       };
     });
-
     const data = {
-      Attendee: formattedAttendance,
+      TeacherAttendee: formattedAttendance,
     };
+    try{
+      const response = await fetch("http://localhost:5000/admin/teacher/TeacherRegisterAttendee",{
+        method:"POST",
+        headers:{
+          "Content-type": "application/json",
+          Auth_Token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NDBmYjBhZmVlMjA1ZWVmOGY2MjU0YyIsIlJvbGUiOiJhZG1pbiIsImlhdCI6MTY5ODg2NjE0NX0.XXbBjijywiX_tJ9H3TwK1txk0aUCdxVpi_IJnv1i334",
 
-    console.log(data);
+        },
+        body:JSON.stringify(data)
+      })
+      const result = await response.json()
+      console.log(result)
+    }
+    catch(e){
+      console.log(e)
+    }
+
   };
 
   useEffect(() => {
