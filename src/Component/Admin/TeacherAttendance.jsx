@@ -74,7 +74,7 @@ const TeacherAttendance = ({ role }) => {
 
   // Calculate the Attendance in percentage
   const calculateAttendancePercentage = (attendanceByDate) => {
-    const totalDays =attendanceByDate.length;
+    const totalDays = attendanceByDate.length;
     const presentDays = attendanceByDate.filter(
       (day) => day.Status === "Present"
     ).length;
@@ -83,11 +83,7 @@ const TeacherAttendance = ({ role }) => {
       return 0;
     }
     return ((presentDays / totalDays) * 100).toFixed(2);
-  }
-
-  
-
-  
+  };
 
   // get the total days of attendance
   const getTotalDays = (attendanceByDate) => attendanceByDate.length;
@@ -106,7 +102,15 @@ const TeacherAttendance = ({ role }) => {
           Attendance Report
         </Typography>
         <SearchComponent user={"teacher"} />
-        <Button variant="outlined" color="error">Clear Search</Button>
+        {filteredList && (
+          <Button
+            variant="outlined"
+            color="error"
+            style={{ marginLeft: "15px", padding: "7px" }}
+          >
+            Clear Search
+          </Button>
+        )}
         <StyledTableContainer component={Paper}>
           <Table>
             <TableHead>
@@ -120,7 +124,7 @@ const TeacherAttendance = ({ role }) => {
                 <StyledTableHeaderCell>Absent Days</StyledTableHeaderCell>
               </StyledTableRow>
             </TableHead>
-            {console.log(filteredList)}
+
             <TableBody>
               {filteredList === "Not Found" ||
               teacherData.success === "false" ||
@@ -135,7 +139,6 @@ const TeacherAttendance = ({ role }) => {
               ) : (
                 dataToRender.map((teacher) => (
                   <StyledTableRow key={teacher._id}>
-               
                     <TableCell>{teacher.TeacherId}</TableCell>
                     <TableCell>{teacher.TeacherName}</TableCell>
                     <TableCell>
