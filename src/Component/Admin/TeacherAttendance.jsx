@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import {
   Card,
   CardContent,
@@ -12,9 +12,6 @@ import {
   Typography,
   styled,
   Button,
-  Select,
-  MenuItem,
-  Stack,
 } from "@mui/material";
 
 import SearchComponent from "./SearchComponent";
@@ -50,13 +47,8 @@ const StyledTableRow = styled(TableRow)({
 const TeacherAttendance = ({ role }) => {
   const context = useContext(AdminContext);
 
-  const {
-    fetchAttendanceData,
-    teacherData,
-    filteredList,
-    fetchUser,
-    allTeacher,
-  } = context;
+  const { fetchAttendanceData, teacherData, filterTeacherList, setFilterTeacherList } =
+    context;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -68,9 +60,9 @@ const TeacherAttendance = ({ role }) => {
     };
 
     fetchData();
-  }, []);
+  }, [fetchAttendanceData]);
 
-  const dataToRender = filteredList ? filteredList : teacherData.data;
+  const dataToRender = filterTeacherList ? filterTeacherList : teacherData.data;
 
   // Calculate the Attendance in percentage
   const calculateAttendancePercentage = (attendanceByDate) => {
@@ -88,6 +80,8 @@ const TeacherAttendance = ({ role }) => {
   // get the total days of attendance
   const getTotalDays = (attendanceByDate) => attendanceByDate.length;
 
+  const handleClearSearch = () => setFilterTeacherList("");
+
   // get the total present day from DB
   const getPresentDays = (attendanceByDate) =>
     attendanceByDate.filter((day) => day.Status === "Present").length;
@@ -101,12 +95,13 @@ const TeacherAttendance = ({ role }) => {
         <Typography variant="h5" component="h1" color="inherit" gutterBottom>
           Attendance Report
         </Typography>
-        <SearchComponent user={"teacher"} />
-        {filteredList && (
+        <SearchComponent user={"teacher"} forWhich={"attendance"} />
+        {filterTeacherList && (
           <Button
             variant="outlined"
             color="error"
             style={{ marginLeft: "15px", padding: "7px" }}
+            onClick={handleClearSearch}
           >
             Clear Search
           </Button>
@@ -126,12 +121,12 @@ const TeacherAttendance = ({ role }) => {
             </TableHead>
 
             <TableBody>
-              {filteredList === "Not Found" ||
+              {filterTeacherList === "Not Found" ||
               teacherData.success === "false" ||
               dataToRender === undefined ? (
                 <StyledTableRow>
                   <TableCell colSpan={7} align="center" marginTop="5px">
-                    {filteredList === "Not Found"
+                    {filterTeacherList === "Not Found"
                       ? "Data Not Found"
                       : teacherData.data}
                   </TableCell>
@@ -140,7 +135,7 @@ const TeacherAttendance = ({ role }) => {
                 dataToRender.map((teacher) => (
                   <StyledTableRow key={teacher._id}>
                     <TableCell>{teacher.TeacherId}</TableCell>
-                    <TableCell>{teacher.TeacherName}</TableCell>
+                    <TableCell>{teacher.Name}</TableCell>
                     <TableCell>
                       {calculateAttendancePercentage(teacher.AttendanceByDate)}%
                     </TableCell>

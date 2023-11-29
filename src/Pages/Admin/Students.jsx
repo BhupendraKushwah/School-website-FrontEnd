@@ -1,9 +1,10 @@
 import React from 'react'
+import StudentCard from '../../Component/Admin/StudentCard'
 
 const Students = () => {
   return (
     <div>
-      Student page
+      <StudentCard/>
     </div>
   )
 }

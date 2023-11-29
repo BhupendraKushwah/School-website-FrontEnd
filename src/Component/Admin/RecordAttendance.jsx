@@ -33,7 +33,7 @@ const RecordAttendance =  ({ userData, Role }) => {
     const formattedAttendance = userData.map((user) => {
       console.log(user._id)
       return {
-        "TeacherName": user.Name,
+        "Name": user.Name,
         "TeacherId":user._id,
         "Status": attendance[user._id] ? "Present" : "Absent",
       };

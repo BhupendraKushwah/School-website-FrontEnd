@@ -22,7 +22,7 @@ const SearchComponent = (props) => {
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <IconButton onClick={()=>handleSearch(props.user)}>
+              <IconButton onClick={()=>handleSearch(props.user,props.forWhich)}>
                 <SearchIcon />
               </IconButton>
             </InputAdornment>

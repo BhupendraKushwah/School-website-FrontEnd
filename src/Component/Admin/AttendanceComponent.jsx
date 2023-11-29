@@ -50,14 +50,14 @@ const StyledTableRow = styled(TableRow)({
 const AttendanceComponent = ({ role }) => {
   const context = useContext(AdminContext);
 
-  const { fetchAttendanceData, studentData, filteredAttendanceList } = context;
+  const { fetchAttendanceData, studentData, filteredStudentList } = context;
 
   const [selectedClass, setSelectedClass] = useState("Nursery");
 
   const setAllClasses = ["Nursery", "LKG", "UKG"];
 
   const dataToRender =
-    filteredAttendanceList.length > 0 ? filteredAttendanceList : studentData;
+    filteredStudentList.length > 0 ? filteredStudentList : studentData;
 
   useEffect(() => {
     fetchAttendanceData(role);
@@ -113,6 +113,7 @@ const AttendanceComponent = ({ role }) => {
         <Typography variant="h5" component="h1" color="inherit" gutterBottom>
           Attendance Report
         </Typography>
+        {console.log(studentData)}
         <Stack
           direction={{ xs: "column", sm: "row" }}
           justifyContent="space-between"

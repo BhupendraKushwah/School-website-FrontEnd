@@ -3,11 +3,11 @@ import AdminContext from "./AdminContext";
 
 const AdminState = (props) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredList, setFilteredList] = useState("");
-  const [filteredAttendanceList, setFilteredAttendanceList] = useState("");
+  const [filterTeacherList, setFilterTeacherList] = useState("");
+  const [filteredStudentList, setFilteredStudentList] = useState("");  //for any type of filter and search in student
   const [teacherData, setTeacherData] = useState([]);
   const [allTeacher, setAllTeacher] = useState([]);
-  const [allStudent, setAllStudent] = useState([]);
+  const [allStudent, setAllStudent] = useState([]); //For Student Attendance
 
   const [studentData, setStudentData] = useState([]);
 
@@ -26,7 +26,6 @@ const AdminState = (props) => {
       });
       const data = await response.json();
 
-      
       if (role === "student") {
         setStudentData(data);
       } else {
@@ -40,27 +39,32 @@ const AdminState = (props) => {
     }
   };
 
-  const handleSearch = (user) => {
-    
+  const handleSearch = (user,forWhich) => {
     if (user === "teacher") {
-      console.log(teacherData.data)
-      const filtered = teacherData.data.filter((teacher) =>
-      teacher.TeacherName.toLowerCase().includes(searchTerm.toLowerCase())
-
+      const Data=forWhich==="attendance"?teacherData.data:allTeacher
+      const filtered = Data.filter((teacher) =>
+      teacher.Name.toLowerCase().includes(searchTerm.toLowerCase())
       );
-      if (filtered.length>0) {
-        setFilteredList(filtered);
-        setSearchTerm("")
+      
+      if (filtered.length > 0) {
+        setFilterTeacherList(filtered);
+        setSearchTerm("");
       } else {
-        setFilteredList("Not Found");
+        setFilterTeacherList("Not Found");
       }
-    } else if (user === "Attendance") {
+    } else if (user === "student") {
       fetchAttendanceData("student");
-      const filtered = studentData.filter((student) =>
-        student.StudentId.includes(searchTerm)
+      const Data=forWhich==="attendance"?studentData.data:allStudent
+      const filtered = Data.filter((student) =>
+        student.Name.toLowerCase().includes(searchTerm.toLowerCase())
       );
-      setFilteredAttendanceList(filtered);
-      setSearchTerm("");
+      console.log(filtered.length > 0);
+      if (filtered.length > 0) {
+        setFilteredStudentList(filtered);
+        setSearchTerm("");
+      } else {
+        setFilteredStudentList("Not Found");
+      }
     }
   };
 
@@ -88,23 +92,22 @@ const AdminState = (props) => {
     }
   };
 
-  const handleFetchMarks=async(id)=>{
-    console.log(id)
-    const url=`http://localhost:5000/admin/students/get-marks/2024/${id}`
-    try{
-    const response=await fetch(url,{
-      headers:{
-        Auth_Token:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjU0MGZiMGFmZWUyMDVlZWY4ZjYyNTRjIiwiUm9sZSI6ImFkbWluIiwiaWF0IjoxNjk4NzYyNzE1fQ.Jwx5l5OVoZFn4Yc4BfX6q_rS3rvv2mQy9BE0jbDD5wU"
-      },
-    })
-    const result =await response.json();
-    console.log(result);
+  const handleFetchMarks = async (id) => {
+    console.log(id);
+    const url = `http://localhost:5000/admin/students/get-marks/2024/${id}`;
+    try {
+      const response = await fetch(url, {
+        headers: {
+          Auth_Token:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjU0MGZiMGFmZWUyMDVlZWY4ZjYyNTRjIiwiUm9sZSI6ImFkbWluIiwiaWF0IjoxNjk4NzYyNzE1fQ.Jwx5l5OVoZFn4Yc4BfX6q_rS3rvv2mQy9BE0jbDD5wU",
+        },
+      });
+      const result = await response.json();
+      console.log(result);
+    } catch (e) {
+      console.log(e);
     }
-    catch (e) {
-      console.log(e,)
-    }
-  }
+  };
 
   return (
     <div>
@@ -112,22 +115,22 @@ const AdminState = (props) => {
         value={{
           searchTerm,
           setSearchTerm,
-          filteredList,
-          setFilteredList,
+          filterTeacherList,
+          setFilterTeacherList,
           handleSearch,
           teacherData,
           setTeacherData,
           fetchAttendanceData,
           studentData,
-          filteredAttendanceList,
-          setFilteredAttendanceList,
+          filteredStudentList,
+          setFilteredStudentList,
           getCurrentDate,
           fetchUser,
           allStudent,
           setAllStudent,
           allTeacher,
           setAllTeacher,
-          handleFetchMarks
+          handleFetchMarks,
         }}
       >
         {props.children}
