@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Container,
   Box,
@@ -12,19 +12,46 @@ import {
   Grid,
 
 } from "@mui/material";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate ,} from 'react-router-dom';
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
 const Login = (props) => {
-
-  const handleSubmit = (e) => {
+  const navigate = useNavigate()
+  const [credentials,setCredentials]=useState({
+    email:"",
+    password:""
+  })
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const url =process.env.REACT_APP_ADMIN_API_KEY+'login'
+    console.log({Email:credentials.email,Password:credentials.password})
+    try{const response = await fetch(url,{
+      method:"POST",
+      headers:{
+        "content-type": "application/json",
+      },
+      body:JSON.stringify({Email:credentials.email,Password:credentials.password})
+    })
+    const result = await response.json()
+    if(result.success){
+      localStorage.setItem("Token",result.Token)
+      navigate("admin/")
+    }
+    else{
+      console.error(result.Error)
+    }}
+    catch(err){
+      if(err=="TypeError: Failed to fetch"){
+        alert("server error")
+      }
+      else{
+        console.error(err)
+      }
+    }
   };
+  onchange=(e)=>{
+    setCredentials({ ...credentials, [e.target.name]: e.target.value })
+  }
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -53,7 +80,9 @@ const Login = (props) => {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={onchange}
           />
+
           <TextField
             margin="normal"
             required
@@ -63,6 +92,7 @@ const Login = (props) => {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={onchange}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
