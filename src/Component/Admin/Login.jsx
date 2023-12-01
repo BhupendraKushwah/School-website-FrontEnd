@@ -24,7 +24,6 @@ const Login = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const url =process.env.REACT_APP_ADMIN_API_KEY+'login'
-    console.log({Email:credentials.email,Password:credentials.password})
     try{const response = await fetch(url,{
       method:"POST",
       headers:{

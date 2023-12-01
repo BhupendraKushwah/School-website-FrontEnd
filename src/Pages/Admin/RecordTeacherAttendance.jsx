@@ -3,6 +3,7 @@ import RecordAttendance from "../../Component/Admin/RecordAttendance";
 import AdminContext from "../../Context/Admin/AdminContext";
 
 const RecordTeacherAttendance = () => {
+
   const context = useContext(AdminContext);
   const { fetchUser, allTeacher } = context;
 
